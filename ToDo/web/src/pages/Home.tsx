@@ -23,8 +23,8 @@ export default function Home() {
 
   return (
     <div>
-      {/* <Navbar />
-      {articles.fetching ? (
+       <Navbar />
+      {/*{articles.fetching ? (
         <Loading />
       ) : articles.data?.articles && articles.data?.articles.length > 0 ? (
         <ol className={styles.list}>
@@ -44,7 +44,7 @@ export default function Home() {
         </ol>
       ) : (
         <Empty>&#10024; Post the first link &#10024;</Empty>
-      )} */} hello Franchisely
+      )} */}
     </div>
   );
 }
