@@ -5,6 +5,7 @@ import Empty from "../components/Empty";
 import Navbar from "../components/Navbar";
 import Loading from "../components/Loading";
 import * as styles from "./Home.css";
+import Button from "../components/Button";
 
 export default function Home() {
   // Handle empty document cache
@@ -14,10 +15,15 @@ export default function Home() {
     query: {
       todos: {
         title: true,
+        complete: true,
       },
     },
     context,
   });
+
+  const markComplete = (title) => {
+    console.log(`will pass ${title} to query to update in server`)
+  }
 
   return (
     <div>
@@ -27,8 +33,9 @@ export default function Home() {
       ) : todos.data?.todos && todos.data?.todos.length > 0 ? (
         <ol className={styles.list}>
           {todos.data?.todos.map((todo, i) => (
-            <li key={i} className={styles.article}>
+            <li key={i} className={(todo.complete) ? styles.complete : styles.article}>
               <div>
+                {!(todo.complete) && <button onClick={() => {markComplete(title)}}>complete</button>}
                 <h2 className={styles.title}>
                   {todo.title}
                 </h2>

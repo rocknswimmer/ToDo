@@ -16,5 +16,6 @@ type Query {
 }
 
 type ToDo {
+  complete: Boolean!
   title: String!
 }

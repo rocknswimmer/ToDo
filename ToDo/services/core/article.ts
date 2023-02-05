@@ -41,6 +41,9 @@ export function todos() {
   .execute();
 }
 
-// export function completeToDo(complete: boolean) {
-
-// }
+export function completeToDo(title: string) {
+  return SQL.DB.updateTable("todo")
+  .set({complete: true})
+  .where("title", "=", title)
+  .execute()
+}

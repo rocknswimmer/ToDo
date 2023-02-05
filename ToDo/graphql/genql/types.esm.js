@@ -69,6 +69,9 @@ export default {
             ]
         },
         "ToDo": {
+            "complete": [
+                6
+            ],
             "title": [
                 2
             ],

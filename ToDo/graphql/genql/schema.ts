@@ -27,6 +27,7 @@ export interface Query {
 }
 
 export interface ToDo {
+    complete: Scalars['Boolean']
     title: Scalars['String']
     __typename: 'ToDo'
 }
@@ -55,6 +56,7 @@ export interface QueryRequest{
 }
 
 export interface ToDoRequest{
+    complete?: boolean | number
     title?: boolean | number
     __typename?: boolean | number
     __scalar?: boolean | number
@@ -127,9 +129,11 @@ export interface QueryObservableChain{
 }
 
 export interface ToDoPromiseChain{
+    complete: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
     title: ({get: (request?: boolean|number, defaultValue?: Scalars['String']) => Promise<Scalars['String']>})
 }
 
 export interface ToDoObservableChain{
+    complete: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
     title: ({get: (request?: boolean|number, defaultValue?: Scalars['String']) => Observable<Scalars['String']>})
 }

@@ -12,6 +12,13 @@ export const article = style({
   borderBottom: `1px solid ${vars.colors.divider}`,
 });
 
+export const complete = style({
+  padding: "1rem",
+  borderBottom: `1px solid ${vars.colors.divider}`,
+  backgroundColor: vars.colors.primary,
+  color: 'white',
+});
+
 export const title = style({
   fontSize: "1.5rem",
   display: "inline-block",
