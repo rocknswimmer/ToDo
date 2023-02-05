@@ -26,8 +26,8 @@ export default function Home() {
         <Loading />
       ) : todos.data?.todos && todos.data?.todos.length > 0 ? (
         <ol className={styles.list}>
-          {todos.data?.todos.map((todo) => (
-            <li key={todo.id} className={styles.article}>
+          {todos.data?.todos.map((todo, i) => (
+            <li key={i} className={styles.article}>
               <div>
                 <h2 className={styles.title}>
                   {todo.title}
