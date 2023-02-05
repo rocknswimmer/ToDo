@@ -9,12 +9,10 @@ import * as styles from "./Home.css";
 export default function Home() {
   // Handle empty document cache
   // https://formidable.com/open-source/urql/docs/basics/document-caching/#adding-typenames
-  const context = useMemo(() => ({ additionalTypenames: ["Article"] }), []);
-  const [articles] = useTypedQuery({
+  const context = useMemo(() => ({ additionalTypenames: ["ToDo"] }), []);
+  const [todos] = useTypedQuery({
     query: {
-      articles: {
-        id: true,
-        url: true,
+      todos: {
         title: true,
       },
     },
@@ -24,27 +22,24 @@ export default function Home() {
   return (
     <div>
        <Navbar />
-      {/*{articles.fetching ? (
+      {todos.fetching ? (
         <Loading />
-      ) : articles.data?.articles && articles.data?.articles.length > 0 ? (
+      ) : todos.data?.todos && todos.data?.todos.length > 0 ? (
         <ol className={styles.list}>
-          {articles.data?.articles.map((article) => (
-            <li key={article.id} className={styles.article}>
+          {todos.data?.todos.map((todo) => (
+            <li key={todo.id} className={styles.article}>
               <div>
                 <h2 className={styles.title}>
-                  <Link to={`/article/${article.id}`}>{article.title}</Link>
+                  {todo.title}
                 </h2>
                 &nbsp;
-                <a target="_blank" href={article.url} className={styles.url}>
-                  ({article.url.replace(/(^\w+:|^)\/\//, "")})
-                </a>
               </div>
             </li>
           ))}
         </ol>
       ) : (
-        <Empty>&#10024; Post the first link &#10024;</Empty>
-      )} */}
+        <Empty>&#10024; Create the first To Do &#10024;</Empty>
+      )}
     </div>
   );
 }

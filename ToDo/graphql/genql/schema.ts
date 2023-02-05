@@ -14,6 +14,7 @@ export interface Article {
 }
 
 export interface Mutation {
+    addToDo: ToDo
     createArticle: Article
     __typename: 'Mutation'
 }
@@ -21,7 +22,13 @@ export interface Mutation {
 export interface Query {
     article: Article
     articles: Article[]
+    todos: ToDo[]
     __typename: 'Query'
+}
+
+export interface ToDo {
+    title: Scalars['String']
+    __typename: 'ToDo'
 }
 
 export interface ArticleRequest{
@@ -33,6 +40,7 @@ export interface ArticleRequest{
 }
 
 export interface MutationRequest{
+    addToDo?: [{title: Scalars['String']},ToDoRequest]
     createArticle?: [{title: Scalars['String'],url: Scalars['String']},ArticleRequest]
     __typename?: boolean | number
     __scalar?: boolean | number
@@ -41,6 +49,13 @@ export interface MutationRequest{
 export interface QueryRequest{
     article?: [{articleID: Scalars['String']},ArticleRequest]
     articles?: ArticleRequest
+    todos?: ToDoRequest
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+export interface ToDoRequest{
+    title?: boolean | number
     __typename?: boolean | number
     __scalar?: boolean | number
 }
@@ -69,6 +84,14 @@ export const isQuery = (obj?: { __typename?: any } | null): obj is Query => {
 }
 
 
+
+const ToDo_possibleTypes: string[] = ['ToDo']
+export const isToDo = (obj?: { __typename?: any } | null): obj is ToDo => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isToDo"')
+  return ToDo_possibleTypes.includes(obj.__typename)
+}
+
+
 export interface ArticlePromiseChain{
     id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Promise<Scalars['ID']>}),
     title: ({get: (request?: boolean|number, defaultValue?: Scalars['String']) => Promise<Scalars['String']>}),
@@ -82,19 +105,31 @@ export interface ArticleObservableChain{
 }
 
 export interface MutationPromiseChain{
+    addToDo: ((args: {title: Scalars['String']}) => ToDoPromiseChain & {get: <R extends ToDoRequest>(request: R, defaultValue?: FieldsSelection<ToDo, R>) => Promise<FieldsSelection<ToDo, R>>}),
     createArticle: ((args: {title: Scalars['String'],url: Scalars['String']}) => ArticlePromiseChain & {get: <R extends ArticleRequest>(request: R, defaultValue?: FieldsSelection<Article, R>) => Promise<FieldsSelection<Article, R>>})
 }
 
 export interface MutationObservableChain{
+    addToDo: ((args: {title: Scalars['String']}) => ToDoObservableChain & {get: <R extends ToDoRequest>(request: R, defaultValue?: FieldsSelection<ToDo, R>) => Observable<FieldsSelection<ToDo, R>>}),
     createArticle: ((args: {title: Scalars['String'],url: Scalars['String']}) => ArticleObservableChain & {get: <R extends ArticleRequest>(request: R, defaultValue?: FieldsSelection<Article, R>) => Observable<FieldsSelection<Article, R>>})
 }
 
 export interface QueryPromiseChain{
     article: ((args: {articleID: Scalars['String']}) => ArticlePromiseChain & {get: <R extends ArticleRequest>(request: R, defaultValue?: FieldsSelection<Article, R>) => Promise<FieldsSelection<Article, R>>}),
-    articles: ({get: <R extends ArticleRequest>(request: R, defaultValue?: FieldsSelection<Article, R>[]) => Promise<FieldsSelection<Article, R>[]>})
+    articles: ({get: <R extends ArticleRequest>(request: R, defaultValue?: FieldsSelection<Article, R>[]) => Promise<FieldsSelection<Article, R>[]>}),
+    todos: ({get: <R extends ToDoRequest>(request: R, defaultValue?: FieldsSelection<ToDo, R>[]) => Promise<FieldsSelection<ToDo, R>[]>})
 }
 
 export interface QueryObservableChain{
     article: ((args: {articleID: Scalars['String']}) => ArticleObservableChain & {get: <R extends ArticleRequest>(request: R, defaultValue?: FieldsSelection<Article, R>) => Observable<FieldsSelection<Article, R>>}),
-    articles: ({get: <R extends ArticleRequest>(request: R, defaultValue?: FieldsSelection<Article, R>[]) => Observable<FieldsSelection<Article, R>[]>})
+    articles: ({get: <R extends ArticleRequest>(request: R, defaultValue?: FieldsSelection<Article, R>[]) => Observable<FieldsSelection<Article, R>[]>}),
+    todos: ({get: <R extends ToDoRequest>(request: R, defaultValue?: FieldsSelection<ToDo, R>[]) => Observable<FieldsSelection<ToDo, R>[]>})
+}
+
+export interface ToDoPromiseChain{
+    title: ({get: (request?: boolean|number, defaultValue?: Scalars['String']) => Promise<Scalars['String']>})
+}
+
+export interface ToDoObservableChain{
+    title: ({get: (request?: boolean|number, defaultValue?: Scalars['String']) => Observable<Scalars['String']>})
 }

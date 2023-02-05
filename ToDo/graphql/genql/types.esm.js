@@ -2,7 +2,7 @@ export default {
     "scalars": [
         1,
         2,
-        5
+        6
     ],
     "types": {
         "Article": {
@@ -22,6 +22,15 @@ export default {
         "ID": {},
         "String": {},
         "Mutation": {
+            "addToDo": [
+                5,
+                {
+                    "title": [
+                        2,
+                        "String!"
+                    ]
+                }
+            ],
             "createArticle": [
                 0,
                 {
@@ -51,6 +60,17 @@ export default {
             ],
             "articles": [
                 0
+            ],
+            "todos": [
+                5
+            ],
+            "__typename": [
+                2
+            ]
+        },
+        "ToDo": {
+            "title": [
+                2
             ],
             "__typename": [
                 2

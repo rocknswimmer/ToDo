@@ -20,3 +20,11 @@ export var isQuery = function(obj) {
   if (!obj || !obj.__typename) throw new Error('__typename is missing in "isQuery"')
   return Query_possibleTypes.includes(obj.__typename)
 }
+
+
+
+var ToDo_possibleTypes = ['ToDo']
+export var isToDo = function(obj) {
+  if (!obj || !obj.__typename) throw new Error('__typename is missing in "isToDo"')
+  return ToDo_possibleTypes.includes(obj.__typename)
+}

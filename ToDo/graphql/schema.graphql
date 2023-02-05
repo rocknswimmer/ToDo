@@ -5,10 +5,16 @@ type Article {
 }
 
 type Mutation {
+  addToDo(title: String!): ToDo!
   createArticle(title: String!, url: String!): Article!
 }
 
 type Query {
   article(articleID: String!): Article!
   articles: [Article!]!
+  todos: [ToDo!]!
+}
+
+type ToDo {
+  title: String!
 }

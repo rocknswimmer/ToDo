@@ -19,8 +19,24 @@ export function get(articleID: string) {
 }
 
 export function list() {
-  return SQL.DB.selectFrom("article")
+  return SQL.DB.selectFrom("todo")
     .selectAll()
-    .orderBy("created", "desc")
     .execute();
+}
+
+export function addToDo(title: string) {
+  // code for adding a comment to an article
+  return SQL.DB.insertInto("todo")
+    .values({
+      title,
+    })
+    .returningAll()
+    .executeTakeFirstOrThrow();
+}
+
+export function todos() {
+  // code for getting a list of comments of an article
+  return SQL.DB.selectFrom("todo")
+  .selectAll()
+  .execute();
 }
