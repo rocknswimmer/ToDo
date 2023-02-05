@@ -40,3 +40,7 @@ export function todos() {
   .selectAll()
   .execute();
 }
+
+// export function completeToDo(complete: boolean) {
+
+// }

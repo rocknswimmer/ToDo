@@ -9,6 +9,16 @@ interface ArticleForm {
 
 export default function Navbar() {
   const navigate = useNavigate();
+  const [result, addToDo] = useTypedMutation((opts: ArticleForm) => ({
+    addToDo: [
+      {
+        title: opts.title,
+      },
+      {
+        title: true,
+      }
+    ]
+  }))
   // const [result, createArticle] = useTypedMutation((opts: ArticleForm) => ({
   //   createArticle: [
   //     opts,
@@ -37,11 +47,10 @@ export default function Navbar() {
 
           if (title.length > 0) {
             e.currentTarget.reset();
-            console.log(title)
-            // const result = await createArticle({
-            //   title,
-            // });
-            // navigate(`/article/${result.data?.createArticle.id}`);
+            const result = await addToDo({
+              title,
+            });
+            navigate('/');
           }
         }}
       >
