@@ -5,7 +5,7 @@ import { builder } from "../builder";
 const ToDoType = builder.objectRef<SQL.Row["todo"]>("ToDo").implement({
   fields: (t) => ({
     title: t.exposeString("title"),
-    complete: t.exposeBoolean("complete")
+    complete: t.exposeBoolean("complete"),
   }),
 });
 

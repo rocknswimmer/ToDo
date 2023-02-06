@@ -6,6 +6,7 @@ import Navbar from "../components/Navbar";
 import Loading from "../components/Loading";
 import * as styles from "./Home.css";
 import Button from "../components/Button";
+import { SQL } from "../../../services/core/sql";
 
 export default function Home() {
   // Handle empty document cache
@@ -21,8 +22,13 @@ export default function Home() {
     context,
   });
 
-  const markComplete = (title) => {
-    console.log(`will pass ${title} to query to update in server`)
+  const markComplete = (todo: Object) => {
+    // const [result] = await SQL.DB.updateTable("todo")
+    // .set({complete: true})
+    // .where("title", "=", title)
+    // .execute();
+    // return result
+    console.log(`will pass ${todo.title} to query to update in RDS if I can figure out how`)
   }
 
   return (
@@ -35,7 +41,7 @@ export default function Home() {
           {todos.data?.todos.map((todo, i) => (
             <li key={i} className={(todo.complete) ? styles.complete : styles.article}>
               <div>
-                {!(todo.complete) && <button onClick={() => {markComplete(title)}}>complete</button>}
+                {!(todo.complete) && <button onClick={() => {markComplete(todo)}}>complete</button>}
                 <h2 className={styles.title}>
                   {todo.title}
                 </h2>
