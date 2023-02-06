@@ -22,6 +22,7 @@ export interface Mutation {
 export interface Query {
     article: Article
     articles: Article[]
+    completeToDo: ToDo
     todos: ToDo[]
     __typename: 'Query'
 }
@@ -50,6 +51,7 @@ export interface MutationRequest{
 export interface QueryRequest{
     article?: [{articleID: Scalars['String']},ArticleRequest]
     articles?: ArticleRequest
+    completeToDo?: [{title: Scalars['String']},ToDoRequest]
     todos?: ToDoRequest
     __typename?: boolean | number
     __scalar?: boolean | number
@@ -119,12 +121,14 @@ export interface MutationObservableChain{
 export interface QueryPromiseChain{
     article: ((args: {articleID: Scalars['String']}) => ArticlePromiseChain & {get: <R extends ArticleRequest>(request: R, defaultValue?: FieldsSelection<Article, R>) => Promise<FieldsSelection<Article, R>>}),
     articles: ({get: <R extends ArticleRequest>(request: R, defaultValue?: FieldsSelection<Article, R>[]) => Promise<FieldsSelection<Article, R>[]>}),
+    completeToDo: ((args: {title: Scalars['String']}) => ToDoPromiseChain & {get: <R extends ToDoRequest>(request: R, defaultValue?: FieldsSelection<ToDo, R>) => Promise<FieldsSelection<ToDo, R>>}),
     todos: ({get: <R extends ToDoRequest>(request: R, defaultValue?: FieldsSelection<ToDo, R>[]) => Promise<FieldsSelection<ToDo, R>[]>})
 }
 
 export interface QueryObservableChain{
     article: ((args: {articleID: Scalars['String']}) => ArticleObservableChain & {get: <R extends ArticleRequest>(request: R, defaultValue?: FieldsSelection<Article, R>) => Observable<FieldsSelection<Article, R>>}),
     articles: ({get: <R extends ArticleRequest>(request: R, defaultValue?: FieldsSelection<Article, R>[]) => Observable<FieldsSelection<Article, R>[]>}),
+    completeToDo: ((args: {title: Scalars['String']}) => ToDoObservableChain & {get: <R extends ToDoRequest>(request: R, defaultValue?: FieldsSelection<ToDo, R>) => Observable<FieldsSelection<ToDo, R>>}),
     todos: ({get: <R extends ToDoRequest>(request: R, defaultValue?: FieldsSelection<ToDo, R>[]) => Observable<FieldsSelection<ToDo, R>[]>})
 }
 

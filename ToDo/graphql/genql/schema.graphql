@@ -12,6 +12,7 @@ type Mutation {
 type Query {
   article(articleID: String!): Article!
   articles: [Article!]!
+  completeToDo(title: String!): ToDo!
   todos: [ToDo!]!
 }
 

@@ -40,7 +40,22 @@ builder.queryFields((t) => ({
   todos: t.field({
     type: [ToDoType],
     resolve: () => Article.todos(),
-  })
+  }),
+  completeToDo: t.field({
+      type: ToDoType,
+      args: {
+        title: t.arg.string({ required: true }),
+      },
+      resolve: async (_, args) => {
+        const result = await Article.completeToDo(args.title)
+
+        if (!result) {
+          throw new Error("couldn't mark Todo complete")
+        }
+
+        return result;
+      }
+    }),
 }));
 
 builder.mutationFields((t) => ({
@@ -59,5 +74,12 @@ builder.mutationFields((t) => ({
         title: t.arg.string({ required: true }),
       },
       resolve: (_, args) => Article.addToDo(args.title)
-    })
+    }),
+    // completeToDo: t.field({
+    //   type: ToDoType,
+    //   args: {
+    //     title: t.arg.string({ required: true }),
+    //   },
+    //   resolve: (_, args) => Article.completeToDo(args.title)
+    // }),
 }));

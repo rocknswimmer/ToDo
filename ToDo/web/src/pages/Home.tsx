@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { useTypedQuery } from "@ToDo/graphql/urql";
 import Empty from "../components/Empty";
@@ -7,8 +7,10 @@ import Loading from "../components/Loading";
 import * as styles from "./Home.css";
 import Button from "../components/Button";
 import { SQL } from "../../../services/core/sql";
+import { useTypedMutation } from "@ToDo/graphql/urql";
 
 export default function Home() {
+  const [completed, setCompleted] = useState('')
   // Handle empty document cache
   // https://formidable.com/open-source/urql/docs/basics/document-caching/#adding-typenames
   const context = useMemo(() => ({ additionalTypenames: ["ToDo"] }), []);
@@ -22,14 +24,46 @@ export default function Home() {
     context,
   });
 
-  const markComplete = (todo: Object) => {
-    // const [result] = await SQL.DB.updateTable("todo")
-    // .set({complete: true})
-    // .where("title", "=", title)
-    // .execute();
+  // const [completeToDo] = useTypedQuery({
+  //   query: {
+  //     completeToDo: {
+  //       title: true,
+  //       // complete: true,
+  //     },
+  //   },
+  //   context,
+  // });
+
+  // const [result, completeToDo] = useTypedMutation((completed) => ({
+  //   completeToDo: [
+  //     {
+  //       title: completed,
+  //     },
+  //     {
+  //       title: true,
+  //     }
+  //   ]
+  // }))
+
+
+
+  const markComplete = async (todo: Object) => {
+    const title =  todo.title.toString();
+    console.log(`will pass ${title} to query to update in RDS if I can figure out how`)
+
+  //   async function complete(title: string) {
+  //   const [result] = await SQL.DB.updateTable("todo")
+  //   .set({complete: true})
+  //   .where("title", "=", title)
+  //   .execute();
+  //   return result
+  // }
+    // complete(title)
+    // const title =  'second todo in console to test map';
+    // const result = await completeToDo(title);
     // return result
-    console.log(`will pass ${todo.title} to query to update in RDS if I can figure out how`)
   }
+
 
   return (
     <div>
